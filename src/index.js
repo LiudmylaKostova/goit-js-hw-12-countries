@@ -3,6 +3,9 @@ import fetchCountries from './js/fetch-countries';
 import country from './templates/country.hbs';
 import countries from './templates/countries.hbs';
 import { error } from "@pnotify/core";
+import "@pnotify/core/dist/PNotify.css";
+import "@pnotify/core/dist/BrightTheme.css";
+import debounce from 'lodash.debounce';
 
 
 const refs = {
@@ -31,4 +34,15 @@ function clearArea() {
   refs.cards.innerHTML = '';
   refs.listCountries.innerHTML = '';
 }
+
+let countryName = '';
+refs.searchCountry.addEventListener(
+  'input',
+  debounce(() => {
+    countryName = refs.searchCountry.value;
+    if (countryName !== '') {
+      fetchCountries(countryName).then(markupCountry);
+    }
+  }, 500),
+);
 
