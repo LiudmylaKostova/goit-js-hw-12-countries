@@ -14,8 +14,13 @@ const refs = {
     cards: document.querySelector('.cards'),
 };
 
+function clearSpace() {
+  refs.cards.innerHTML = '';
+  refs.listCountries.innerHTML = '';
+}
+
 function markupCountry(data) {
-    clearArea();
+    clearSpace();
      if (data.length === 1) {
     const markup = country(data);
     refs.cards.insertAdjacentHTML('afterbegin', markup);
@@ -30,10 +35,6 @@ function markupCountry(data) {
   } 
  }
 
-function clearArea() {
-  refs.cards.innerHTML = '';
-  refs.listCountries.innerHTML = '';
-}
 
 let countryName = '';
 refs.searchCountry.addEventListener(
